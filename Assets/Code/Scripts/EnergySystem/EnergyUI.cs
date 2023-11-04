@@ -21,12 +21,7 @@ namespace Code.EnergySystem
 
         private void Start()
         {
-            SetMaxValue(energySystem.MaxEnergy);
-        }
-        
-        public void SetMaxValue(int value)
-        {
-            energySlider.maxValue = value;
+            SetCurrentValue(energySystem.CurrentEnergy);
         }
 
         public void SetCurrentValue(float value)

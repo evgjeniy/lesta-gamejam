@@ -10,7 +10,7 @@ namespace Code.EnergySystem
 
         public void Unsubscribe()
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }
