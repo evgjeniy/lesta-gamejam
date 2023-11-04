@@ -1,5 +1,7 @@
 ﻿using Code.Scripts.Services;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Code.Scripts
 {
@@ -14,14 +16,39 @@ namespace Code.Scripts
         [SerializeField, Min(0.0f)] private float groundCheckRadius;
         [SerializeField] private Transform groundCheck;
         [SerializeField] private LayerMask groundMask;
-        
+
+        [SerializeField] private Projectile projectileRef;
+
         private Rigidbody _rigidbody;
         private PlayerInputBehaviour _inputBehaviour;
 
+        private Projectile.Factory _factory;
+
         private void Awake()
         {
+            _factory = new Projectile.Factory(projectileRef);
             _rigidbody = GetComponent<Rigidbody>();
             _inputBehaviour = GetComponent<PlayerInputBehaviour>();
+        }
+
+        private void Start()
+        {
+            _inputBehaviour.ShootAction.performed += OnShootAction;
+        }
+
+        private void OnEnable()
+        {
+          //  _inputBehaviour.ShootAction.performed += OnShootAction;
+        }
+
+        private void OnDisable()
+        {
+            _inputBehaviour.ShootAction.performed -= OnShootAction;
+        }
+
+        private void OnShootAction(InputAction.CallbackContext context)
+        {
+            _factory.Create(Vector3.left).transform.position = transform.position;
         }
 
         private void FixedUpdate()

@@ -93,11 +93,13 @@ namespace Code.EnergySystem
         
         void Update()
         {
+            /*
             if (Input.GetMouseButtonDown(0))
             {
                 var newSpender = GameObject.Instantiate(spenderPrefab);
                 AddSpender(newSpender);
             }
+            */
             CheckCurrentEnergy();
             RecountEnergy();
         }
