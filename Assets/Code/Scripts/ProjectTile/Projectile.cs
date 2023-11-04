@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class SnariadMove : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody rgBullet;
     [SerializeField] private float moveSpeed;
     [SerializeField] private int lifeTime;
+    [SerializeField] private Vector3 moveDir;
 
-    public Vector3 moveDir;
     private Vector3 lastVelocity;
 
     void Start()
@@ -35,11 +35,30 @@ public class SnariadMove : MonoBehaviour
                 rgBullet.velocity = moveDir * moveSpeed;
                 break;
             case "bouncerCube":     //куб отлетает, снаряд исчезает
-                Object.Destroy(gameObject);
+                Destroy(gameObject);
                 break;
             case "destroyerCube":   //статический куб (снаряд исчезает)
-                Object.Destroy(gameObject);
+                Destroy(gameObject);
+                Destroy(collision.collider.gameObject);
                 break;
+        }
+    }
+
+    public class Factory
+    {
+        private Projectile _ref;
+
+        public Factory(Projectile visualRef)
+        {
+            _ref = visualRef;
+        }
+
+        public Projectile Create(Vector3 dir)
+        {
+            var result = Instantiate(_ref);
+            result.moveDir = dir;
+
+            return result;
         }
     }
 }
