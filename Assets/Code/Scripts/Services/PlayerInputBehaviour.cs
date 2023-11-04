@@ -1,22 +1,25 @@
-﻿using Code.Scripts.Contracts;
+﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Code.Scripts.Services
 {
-    public class PlayerInputBehaviour : IPlayerInputService
+    public class PlayerInputBehaviour : MonoBehaviour
     {
-        private readonly InputActions _inputActions;
+        private InputActions _inputActions;
 
-        public PlayerInputBehaviour(InputActions inputActions) => _inputActions = inputActions;
+        private void Awake() => _inputActions = new InputActions();
 
-        public void Enable() => _inputActions.Enable();
+        private void OnEnable() => _inputActions.Enable();
 
-        public void Disable() => _inputActions.Disable();
+        private void OnDisable() => _inputActions.Disable();
 
         public Vector3 GetMoveDirection()
         {
-            var inputDirection = _inputActions.Player.Move.ReadValue<Vector2>();
-            return new Vector3(inputDirection.x, 0.0f, inputDirection.y);
+            var moveAxis = _inputActions.Player.Move.ReadValue<float>();
+            return new Vector3(0.0f, 0.0f, moveAxis);
         }
+
+        public bool IsJumping() => _inputActions.Player.Jump.ReadValue<float>() != 0.0f;
     }
 }
