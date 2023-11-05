@@ -1,8 +1,10 @@
 using System;
-using UnityEngine;
 
-public interface IDestroyable
+namespace Code.Scripts.KillSpawn
 {
-    public event Action<IDestroyable> Destroyed;
-    public void KillObj();
+    public interface IDestroyable
+    {
+        public event Action<IDestroyable> Destroyed;
+        public void KillObj();
+    }
 }

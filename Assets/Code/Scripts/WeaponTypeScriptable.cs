@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using Code.Scripts.Shoot;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponScriptable", menuName = "Weapon/WeaponType", order =1)]
-public class WeaponTypeScriptable : ScriptableObject
+namespace Code.Scripts
 {
-    public Projectile ProjectileType;
-    public Color ProjectileColor;
+    [CreateAssetMenu(fileName = "WeaponScriptable", menuName = "Weapon/WeaponType", order =1)]
+    public class WeaponTypeScriptable : ScriptableObject
+    {
+        public Projectile ProjectileType;
+        public Color ProjectileColor;
     
+    }
 }

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITimeStamp
+namespace Code.Scripts.Timeline
 {
-    public float Time { get; }
+    public interface ITimeStamp
+    {
+        public float Time { get; }
+    }
 }

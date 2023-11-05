@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITimeStopable
+namespace Code.Scripts.Timeline
 {
-    public void StartTime();
-    public void StopTime();
+    public interface ITimeStopable
+    {
+        public void StartTime();
+        public void StopTime();
+    }
 }

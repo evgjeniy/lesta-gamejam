@@ -1,36 +1,37 @@
 using Code.Scripts.EnergySystem;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeReverseProjectile : Projectile
+namespace Code.Scripts.Shoot
 {
-    [SerializeField] private EnergySpender energySpender;
-
-    public override void OnHitDestroyable(GameObject obj, Collision context)
+    public class TimeReverseProjectile : Projectile
     {
-        Destroy(gameObject);
-    }
+        [SerializeField] private EnergySpender energySpender;
 
-    public override void OnHitDynamic(GameObject obj, Collision context)
-    {
-        obj.TryGetComponent<Timeline>(out var timeline);
-        var energy = Instantiate(energySpender);
-        energy.OnDestroy += () =>
+        public override void OnHitDestroyable(GameObject obj, Collision context)
         {
-            timeline.StopReverse();
-            timeline.StartTime();
-        };
-        energySystem.AddSpender(energy);
+            Destroy(gameObject);
+        }
 
-        if(!timeline.IsReversed)
-            timeline?.StartReverse();
+        public override void OnHitDynamic(GameObject obj, Collision context)
+        {
+            obj.TryGetComponent<Timeline.Timeline>(out var timeline);
+            var energy = Instantiate(energySpender);
+            energy.OnDestroy += () =>
+            {
+                timeline.StopReverse();
+                timeline.StartTime();
+            };
+            energySystem.AddSpender(energy);
 
-        Destroy(gameObject);
-    }
+            if(!timeline.IsReversed)
+                timeline.StartReverse();
 
-    public override void OnHitStatic(GameObject obj, Collision context)
-    {
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
+
+        public override void OnHitStatic(GameObject obj, Collision context)
+        {
+            Destroy(gameObject);
+        }
     }
 }

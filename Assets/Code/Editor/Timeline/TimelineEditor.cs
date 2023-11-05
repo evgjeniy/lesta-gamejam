@@ -1,49 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
+using Code.Scripts.Timeline;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(TransformTimeline))]
-public class TimelineEditor : Editor
+namespace Code.Editor.Timeline
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(TransformTimeline))]
+    public class TimelineEditor : UnityEditor.Editor
     {
-        TransformTimeline timeline = (TransformTimeline)target;
-
-        DrawDefaultInspector();
-
-        EditorGUILayout.Space(10);
-        GUIStyle headerStyle = new GUIStyle(GUI.skin.label);
-        headerStyle.fontStyle = FontStyle.Bold;
-        EditorGUILayout.LabelField("My Custom Header", headerStyle);
-
-        if (!timeline.IsStoped)
+        public override void OnInspectorGUI()
         {
-            if (GUILayout.Button("Stop Time"))
-                timeline.StopTime();
-        }
-        else
-        {
-            if (GUILayout.Button("Start Time"))
+            var timeline = (TransformTimeline)target;
+
+            DrawDefaultInspector();
+
+            EditorGUILayout.Space(10);
+            var headerStyle = new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold };
+            EditorGUILayout.LabelField("My Custom Header", headerStyle);
+
+            if (!timeline.IsStoped)
             {
-                timeline.StartTime();
-                if(timeline.IsReversed)
+                if (GUILayout.Button("Stop Time"))
+                    timeline.StopTime();
+            }
+            else
+            {
+                if (GUILayout.Button("Start Time"))
                 {
-                    timeline.StopReverse();
+                    timeline.StartTime();
+                    if(timeline.IsReversed)
+                    {
+                        timeline.StopReverse();
+                    }
                 }
             }
-        }
 
-        if (!timeline.IsReversed)
-        {
-            if (GUILayout.Button("Reverse"))
-                timeline.StartReverse();
-
-        }
-        else 
-            if (GUILayout.Button("Stop Reverse"))
+            if (!timeline.IsReversed)
+            {
+                if (GUILayout.Button("Reverse"))
+                    timeline.StartReverse();
+            }
+            else if (GUILayout.Button("Stop Reverse"))
+            {
                 timeline.StopReverse();
-
-
+            }
+        }
     }
 }

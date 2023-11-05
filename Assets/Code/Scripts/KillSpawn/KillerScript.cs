@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class KillerScript : MonoBehaviour
+namespace Code.Scripts.KillSpawn
 {
-    [SerializeField] private LayerMask lm;
-    private void OnTriggerEnter(Collider other)
+    public class KillerScript : MonoBehaviour
     {
-        if (((lm.value >> other.transform.gameObject.layer) & 1) == 1)
+        [SerializeField] private LayerMask lm;
+        
+        private void OnTriggerEnter(Collider other)
         {
-            other.attachedRigidbody.TryGetComponent<Destroyable>(out var destroyable);
-            destroyable?.KillObj();
+            if (((lm.value >> other.transform.gameObject.layer) & 1) != 1) return;
+            
+            if (other.attachedRigidbody.TryGetComponent<Destroyable>(out var destroyable))
+                destroyable.KillObj();
         }
     }
 }

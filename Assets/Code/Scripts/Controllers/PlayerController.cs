@@ -1,9 +1,8 @@
 ﻿using Code.Scripts.Services;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Code.Scripts
+namespace Code.Scripts.Controllers
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(PlayerInputBehaviour))]

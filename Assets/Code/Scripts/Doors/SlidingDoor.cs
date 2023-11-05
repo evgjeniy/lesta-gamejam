@@ -1,36 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class SlidingDoor : OpenableDoor
+namespace Code.Scripts.Doors
 {
-    [SerializeField] private Transform door;
-
-    [SerializeField] private Transform destination;
-
-    [SerializeField] private float speed;
-
-    private Coroutine open;
-
-    public override void OpenDoor()
+    public class SlidingDoor : OpenableDoor
     {
-        Debug.Log("Open Door");
-        if(open == null)
-            open = StartCoroutine(OpenDoorCoroutine());
-    }
+        [SerializeField] private Transform door;
+        [SerializeField] private Transform destination;
+        [SerializeField] private float speed;
 
-    private IEnumerator OpenDoorCoroutine()
-    {
-        float startTime = Time.time;
-        Vector3 startPosition = door.position;
-        while (Vector3.Distance(door.position, destination.position) > 0.1f)
+        private Coroutine _open;
+
+        public override void OpenDoor()
         {
-            float distanceCovered = (Time.time - startTime) * speed;
-            float journeyFraction = distanceCovered / Vector3.Distance(door.position, destination.position);
+            Debug.Log("Open Door");
+            _open ??= StartCoroutine(OpenDoorCoroutine());
+        }
 
-            door.position = Vector3.Lerp(startPosition, destination.position, journeyFraction);
-            yield return null;
+        private IEnumerator OpenDoorCoroutine()
+        {
+            var startTime = Time.time;
+            var startPosition = door.position;
+
+            var distanceCovered = (Time.time - startTime) * speed;
+            var journeyFraction = distanceCovered / Vector3.Distance(startPosition, destination.position);
+            
+            while (Vector3.Distance(door.position, destination.position) > 0.1f)
+            {
+                door.position = Vector3.Lerp(startPosition, destination.position, journeyFraction);
+                yield return null;
+            }
         }
     }
 }

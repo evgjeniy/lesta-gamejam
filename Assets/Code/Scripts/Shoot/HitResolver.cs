@@ -1,29 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HitResolver : MonoBehaviour
+namespace Code.Scripts.Shoot
 {
-    public enum HitType
+    public class HitResolver : MonoBehaviour
     {
-        Static, Dynamic, Destroyable
-    }
+        public enum HitType { Static, Dynamic, Destroyable }
 
-    [SerializeField] private HitType hitType;
+        [SerializeField] private HitType hitType;
 
-    public void ResolveHit(IProjectileHit hit, Collision context)
-    {
-        switch (hitType)
+        public void ResolveHit(IProjectileHit hit, Collision context)
         {
-            case HitType.Static:
-                hit.OnHitStatic(gameObject, context);
-                break;
-            case HitType.Dynamic:
-                hit.OnHitDynamic(gameObject, context);
-                break;
-            case HitType.Destroyable:
-                hit.OnHitDestroyable(gameObject, context);
-                break;
+            switch (hitType)
+            {
+                case HitType.Static:
+                    hit.OnHitStatic(gameObject, context);
+                    break;
+                case HitType.Dynamic:
+                    hit.OnHitDynamic(gameObject, context);
+                    break;
+                case HitType.Destroyable:
+                    hit.OnHitDestroyable(gameObject, context);
+                    break;
+            }
         }
     }
 }

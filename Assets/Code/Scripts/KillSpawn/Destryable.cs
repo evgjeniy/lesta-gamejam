@@ -1,14 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroyable : MonoBehaviour, IDestroyable
+namespace Code.Scripts.KillSpawn
 {
-    public event Action<IDestroyable> Destroyed;
-    public void KillObj()
+    public class Destroyable : MonoBehaviour, IDestroyable
     {
-        Destroyed?.Invoke(this);
-        Destroy(gameObject);
+        public event Action<IDestroyable> Destroyed;
+        
+        public void KillObj()
+        {
+            Destroyed?.Invoke(this);
+            Destroy(gameObject);
+        }
     }
 }
