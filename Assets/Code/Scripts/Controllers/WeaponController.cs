@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Code.Scripts.Services;
 using Code.Scripts.Shoot;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Code.Scripts.Controllers
 {
@@ -11,9 +13,13 @@ namespace Code.Scripts.Controllers
         [SerializeField] private EnergySystem.EnergySystem energySystem;
         [SerializeField] private Renderer renderer;
         [SerializeField] private float switchInactiveTime;
-        
+        [SerializeField, Min(0.0f)] private float shootCooldown = 0.5f;
+        [SerializeField, Min(0.0f)] private float shootEnergy = 25f;
+
+        private PlayerInputBehaviour _inputBehaviour;
         private bool _canSwitch = true;
         private int _currentProjectileType;
+        private float _shootTimer;
 
         private int CurrentType
         {
@@ -29,26 +35,49 @@ namespace Code.Scripts.Controllers
                 else
                     _currentProjectileType = value;
                 renderer.material.color = weaponType[CurrentType].ProjectileColor;
+                
                 StartCoroutine(WaitForSwitch());
             }
         }
 
-        public void ChangeWeaponType(float mouseInput)
+        private void Awake() => _inputBehaviour = GetComponent<PlayerInputBehaviour>();
+
+        private void Update() => _shootTimer += Time.deltaTime;
+
+        private void OnEnable()
         {
-            switch (mouseInput)
+            _inputBehaviour.Shoot.performed += Shoot;
+            _inputBehaviour.ChangeWeapon.performed += ChangeWeapon;
+        }
+
+        private void OnDisable()
+        {
+            _inputBehaviour.Shoot.performed -= Shoot;
+            _inputBehaviour.ChangeWeapon.performed -= ChangeWeapon;
+        }
+
+        private void ChangeWeapon(InputAction.CallbackContext context)
+        {
+            switch (context.ReadValue<float>())
             {
-                case > 0.6f:
-                    CurrentType++;
-                    break;
-                case < -0.6f:
-                    CurrentType--;
-                    break;
+                case > 0.6f: CurrentType++; break;
+                case < -0.6f: CurrentType--; break;
             }
         }
-    
-        public void Shoot(Vector3 direction)
+        
+        private void Shoot(InputAction.CallbackContext context)
         {
-            SpawnProjectile(direction);
+            if (_shootTimer < shootCooldown) return;
+            _shootTimer = 0.0f;
+
+            if (Camera.main == null) return;
+
+            if (!energySystem.SpendEnergy(shootEnergy)) return;
+
+            var movementDirection = Input.mousePosition;
+            movementDirection.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
+            
+            SpawnProjectile(Camera.main.ScreenToWorldPoint(movementDirection) - transform.position);
         }
 
         private Projectile SpawnProjectile(Vector3 direction)
