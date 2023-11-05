@@ -71,7 +71,7 @@ namespace Code.Scripts
             var movementDirection = Input.mousePosition;
             movementDirection.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
             var projectileInstance = Instantiate(projectileRef, transform.position, Quaternion.identity);
-            projectileInstance.MoveDirection = Camera.main.ScreenToWorldPoint(movementDirection);
+            projectileInstance.MoveDirection = Camera.main.ScreenToWorldPoint(movementDirection) - transform.position;
         }
     }
 }
