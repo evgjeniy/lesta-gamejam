@@ -417,11 +417,11 @@ MonoBehaviour:
   jumpVelocityY: 6
   shootCooldown: 0.5
   shootEnergy: 10
-  groundCheckRadius: 0.1
+  groundCheckRadius: 1
   groundCheck: {fileID: 1151692533683467445}
   groundMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 577
   weaponController: {fileID: 9002401361391328181}
   energySystem: {fileID: 6960204825566994903}
 --- !u!114 &6960204825566994903

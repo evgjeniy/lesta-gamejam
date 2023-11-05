@@ -10,12 +10,19 @@ namespace Code.Scripts.EnergySystem
 
         private void OnEnable()
         {
+            if (energySystem == null) return;
             energySystem.OnEnergyChanged += SetCurrentValue;
         }
 
         private void OnDisable()
         {
+            if (energySystem == null) return;
             energySystem.OnEnergyChanged -= SetCurrentValue;
+        }
+
+        public void BindPlayer()
+        {
+            energySystem.OnEnergyChanged += SetCurrentValue;
         }
 
         private void Start()
