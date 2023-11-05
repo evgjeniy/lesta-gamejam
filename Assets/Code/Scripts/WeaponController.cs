@@ -24,16 +24,19 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void ChangeTypeNext()
+    public void ChangeWeaponType(float mouseInput)
     {
-        CurrentType++;
+        switch (mouseInput)
+        {
+            case > 0:
+                CurrentType++;
+                break;
+            case < 0:
+                CurrentType--;
+                break;
+        }
     }
-
-    public void ChangeTypePrev()
-    {
-        CurrentType--;
-    }
-
+    
     public void Shoot(Vector3 direction)
     {
         SpawnProjectile(direction);
