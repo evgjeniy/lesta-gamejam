@@ -7,8 +7,8 @@ public class KillerScript : MonoBehaviour
     {
         if (((lm.value >> other.transform.gameObject.layer) & 1) == 1)
         {
-            other.TryGetComponent<IDestroyable>(out var destroyable);
-            destroyable.KillObj();
+            other.attachedRigidbody.TryGetComponent<Destroyable>(out var destroyable);
+            destroyable?.KillObj();
         }
     }
 }
