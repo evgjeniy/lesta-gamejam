@@ -1,5 +1,7 @@
-﻿using Code.Scripts.Overlap;
+﻿using System;
+using Code.Scripts.Overlap;
 using Code.Scripts.Services;
+using Code.Scripts.Util;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +11,6 @@ namespace Code.Scripts.Controllers
     [RequireComponent(typeof(PlayerInputBehaviour))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField, Min(0.0f)] private float speed = 5.0f;
         [SerializeField, Min(0.0f)] private float jumpVelocityY = 5.0f;
 
         [SerializeField] private CheckSphereOverlap groundCheckSphere;
@@ -17,9 +18,14 @@ namespace Code.Scripts.Controllers
         
         private PlayerInputBehaviour _inputBehaviour;
         private Rigidbody _rigidbody;
+        private Animator _animator;
+        
+        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+        private static readonly int MoveAxis = Animator.StringToHash("MoveAxis");
 
         private void Awake()
         {
+            _animator = GetComponent<Animator>();
             _rigidbody = GetComponent<Rigidbody>();
             _inputBehaviour = GetComponent<PlayerInputBehaviour>();
         }
@@ -38,11 +44,15 @@ namespace Code.Scripts.Controllers
 
         private void FixedUpdate()
         {
-            var moveAxis = _inputBehaviour.GetMoveAxis();
-            var moveDirection = Vector3.right * moveAxis;
-            _rigidbody.position += moveDirection * (speed * Time.fixedDeltaTime);
+            var lookVector = Camera.main.GetMousePosition(transform.position);
             
-            if (moveAxis != 0.0f) _rigidbody.rotation = Quaternion.LookRotation(moveDirection);
+            var sign = Mathf.Sign(lookVector.x - transform.position.x);
+            _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, Quaternion.LookRotation(Vector3.right * sign), 10 * Time.fixedDeltaTime);
+
+            var moveAxis = _inputBehaviour.GetMoveAxis();
+            var isMoving = moveAxis != 0.0f;
+            _animator.SetBool(IsMoving, isMoving);
+            if (isMoving) _animator.SetFloat(MoveAxis, moveAxis * sign);
         }
 
         private void DisableAbility(InputAction.CallbackContext context)

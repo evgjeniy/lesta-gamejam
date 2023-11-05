@@ -138,37 +138,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2126437478005183237
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1151692533683467445}
-  m_Layer: 3
-  m_Name: Ground Check Transform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1151692533683467445
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126437478005183237}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 353142795653981345}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4294673652559028115
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +327,6 @@ Transform:
   m_Children:
   - {fileID: 1382210831046895530}
   - {fileID: 9218303588485921433}
-  - {fileID: 1151692533683467445}
   - {fileID: 4919485951002986982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -415,14 +383,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpVelocityY: 6
-  shootCooldown: 0.5
-  shootEnergy: 10
-  groundCheckRadius: 1
-  groundCheck: {fileID: 1151692533683467445}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 577
-  weaponController: {fileID: 9002401361391328181}
+  groundCheckSphere:
+    gizmos:
+      drawType: 1
+      gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+    root: {fileID: 353142795653981345}
+    offset: {x: 0, y: -1, z: 0}
+    radius: 0.2
   energySystem: {fileID: 6960204825566994903}
 --- !u!114 &6960204825566994903
 MonoBehaviour:
@@ -458,6 +425,8 @@ MonoBehaviour:
   energySystem: {fileID: 6960204825566994903}
   renderer: {fileID: 2095973348335132305}
   switchInactiveTime: 0
+  shootCooldown: 0.5
+  shootEnergy: 25
 --- !u!114 &2829636187853212667
 MonoBehaviour:
   m_ObjectHideFlags: 0

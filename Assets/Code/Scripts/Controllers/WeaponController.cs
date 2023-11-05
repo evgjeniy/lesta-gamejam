@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Code.Scripts.Services;
 using Code.Scripts.Shoot;
+using Code.Scripts.Util;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ namespace Code.Scripts.Controllers
         [SerializeField] private List<WeaponTypeScriptable> weaponType;
         [SerializeField] private EnergySystem.EnergySystem energySystem;
         [SerializeField] private Renderer renderer;
+        [SerializeField] private Transform projectileSpawnPoint;
         [SerializeField] private float switchInactiveTime;
         [SerializeField, Min(0.0f)] private float shootCooldown = 0.5f;
         [SerializeField, Min(0.0f)] private float shootEnergy = 25f;
@@ -74,15 +76,14 @@ namespace Code.Scripts.Controllers
 
             if (!energySystem.SpendEnergy(shootEnergy)) return;
 
-            var movementDirection = Input.mousePosition;
-            movementDirection.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
+            var spawnPosition = projectileSpawnPoint.position;
             
-            SpawnProjectile(Camera.main.ScreenToWorldPoint(movementDirection) - transform.position);
+            SpawnProjectile(Camera.main.GetMousePosition(spawnPosition) - spawnPosition);
         }
 
         private Projectile SpawnProjectile(Vector3 direction)
         {
-            var result = Instantiate(weaponType[CurrentType].ProjectileType, transform.position, Quaternion.identity);
+            var result = Instantiate(weaponType[CurrentType].ProjectileType, projectileSpawnPoint.position, Quaternion.identity);
             result.MoveDirection = direction;
             result.energySystem = energySystem;
             return result;
