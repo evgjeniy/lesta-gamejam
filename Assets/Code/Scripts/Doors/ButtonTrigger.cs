@@ -1,10 +1,12 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class ButtonTrigger : MonoBehaviour
 {
-    [SerializeField] private OpenableDoor connectedDoor;
+    [SerializeField] private UnityEvent actionPressed;
+    [SerializeField] private UnityEvent actionReleased;
     private void Start()
     {
         gameObject.GetComponent<Collider>().isTrigger = true;
@@ -14,7 +16,7 @@ public class ButtonTrigger : MonoBehaviour
     {
         if (other.GetComponent<ConfigurableJoint>() != null)
         {
-            connectedDoor.OpenDoor();
+            actionPressed?.Invoke();
         }
     }
 
@@ -22,7 +24,7 @@ public class ButtonTrigger : MonoBehaviour
     {
         if (other.GetComponent<ConfigurableJoint>() != null)
         {
-            connectedDoor.OpenDoor();
+            actionReleased?.Invoke();
         }
     }
 }
