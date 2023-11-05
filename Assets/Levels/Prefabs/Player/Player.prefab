@@ -415,14 +415,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpVelocityY: 6
-  shootCooldown: 0.5
-  shootEnergy: 10
-  groundCheckRadius: 1
-  groundCheck: {fileID: 1151692533683467445}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 577
-  weaponController: {fileID: 9002401361391328181}
+  groundCheckSphere:
+    gizmos:
+      drawType: 1
+      gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+    root: {fileID: 353142795653981345}
+    offset: {x: 0, y: -1, z: 0}
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 577
+    radius: 0.2
   energySystem: {fileID: 6960204825566994903}
 --- !u!114 &6960204825566994903
 MonoBehaviour:
@@ -458,6 +460,8 @@ MonoBehaviour:
   energySystem: {fileID: 6960204825566994903}
   renderer: {fileID: 2095973348335132305}
   switchInactiveTime: 0
+  shootCooldown: 0.5
+  shootEnergy: 25
 --- !u!114 &2829636187853212667
 MonoBehaviour:
   m_ObjectHideFlags: 0

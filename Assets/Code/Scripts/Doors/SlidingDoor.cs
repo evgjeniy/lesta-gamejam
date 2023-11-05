@@ -7,26 +7,26 @@ namespace Code.Scripts.Doors
     {
         [SerializeField] private Transform door;
         [SerializeField] private Transform destination;
-        [SerializeField] private float speed;
 
         private Coroutine _open;
 
         public override void OpenDoor()
         {
             Debug.Log("Open Door");
-            _open ??= StartCoroutine(OpenDoorCoroutine());
+
+            if(_open == null) 
+                _open = StartCoroutine(OpenDoorCoroutine());
         }
 
         private IEnumerator OpenDoorCoroutine()
         {
             var startTime = Time.time;
             var startPosition = door.position;
-
-            var distanceCovered = (Time.time - startTime) * speed;
-            var journeyFraction = distanceCovered / Vector3.Distance(startPosition, destination.position);
             
             while (Vector3.Distance(door.position, destination.position) > 0.1f)
             {
+                var distanceCovered = (Time.time - startTime) * Speed;
+                var journeyFraction = distanceCovered / Vector3.Distance(startPosition, destination.position);
                 door.position = Vector3.Lerp(startPosition, destination.position, journeyFraction);
                 yield return null;
             }

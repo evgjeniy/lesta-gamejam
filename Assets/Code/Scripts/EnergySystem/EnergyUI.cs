@@ -20,13 +20,15 @@ namespace Code.Scripts.EnergySystem
             energySystem.OnEnergyChanged -= SetCurrentValue;
         }
 
-        public void BindPlayer()
+        public void BindPlayer(EnergySystem energySystem)
         {
             energySystem.OnEnergyChanged += SetCurrentValue;
+            SetCurrentValue(energySystem.CurrentEnergy);
         }
 
         private void Start()
         {
+            if (energySystem == null) return;
             SetCurrentValue(energySystem.CurrentEnergy);
         }
 

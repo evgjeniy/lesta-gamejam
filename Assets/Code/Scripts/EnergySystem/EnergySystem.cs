@@ -49,7 +49,12 @@ namespace Code.Scripts.EnergySystem
         {
             CurrentEnergy = MaxEnergy;
         }
-        
+
+        private void OnDestroy()
+        {
+            RemoveAllSpenders();
+        }
+
         public void AddSpender(EnergySpender spender)
         {
             if (_currentEnergy >= minimalEnergyToAddSpender)

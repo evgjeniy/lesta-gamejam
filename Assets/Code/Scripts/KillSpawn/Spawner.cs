@@ -21,5 +21,10 @@ namespace Code.Scripts.KillSpawn
             return obj;
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, 1);
+        }
     }
 }
