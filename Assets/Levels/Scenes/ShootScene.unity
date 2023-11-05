@@ -634,6 +634,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9002401361391328181, guid: b269fb0dc57c0c3488682a693bf5a6be, type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 1094553917}
+    - target: {fileID: 9002401361391328181, guid: b269fb0dc57c0c3488682a693bf5a6be, type: 3}
+      propertyPath: switchInactiveTime
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1045,6 +1053,11 @@ Transform:
   - {fileID: 1296239686}
   m_Father: {fileID: 1109834556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!120 &1094553917 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 2095973348335132305, guid: b269fb0dc57c0c3488682a693bf5a6be, type: 3}
+  m_PrefabInstance: {fileID: 398790957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1109834555
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12cdd3df9cb8d942b2c3decd6a5dc51, type: 3}
+  m_Name: TimeReverse
+  m_EditorClassIdentifier: 
+  ProjectileType: {fileID: -1526945881165309892, guid: 488e6dc0bd67aa047883145e8c5b4a1e, type: 3}
+  ProjectileColor: {r: 0, g: 0.045312863, b: 0.8301887, a: 1}

@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType:
-  - {fileID: 7985885932296697623, guid: 48db93bae36dac94a8967d0d94e60a98, type: 3}
-  - {fileID: -1526945881165309892, guid: 488e6dc0bd67aa047883145e8c5b4a1e, type: 3}
-  - {fileID: -1796175233669746801, guid: 6d89cf6333524604891f1b390465253a, type: 3}
+  - {fileID: 11400000, guid: 69033c1a5f9b5974dbc98b24dab3f38e, type: 2}
+  - {fileID: 11400000, guid: b2ae59bf8df67694fb3361203e3aa3df, type: 2}
+  - {fileID: 11400000, guid: 0ed528378681bee4e93affee2dc6c106, type: 2}
   energySystem: {fileID: 6960204825566994903}
