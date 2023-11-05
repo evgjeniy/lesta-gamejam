@@ -65,7 +65,7 @@ namespace Code.Scripts
 
         private void ChangeWeapon(InputAction.CallbackContext context)
         {
-            weaponController.ChangeTypeNext();
+            weaponController.ChangeWeaponType(context.ReadValue<float>());
         }
 
         private void Jump(InputAction.CallbackContext context)

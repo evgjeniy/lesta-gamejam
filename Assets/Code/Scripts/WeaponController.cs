@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private List<Projectile> weaponType;
+    [SerializeField] private List<WeaponTypeScriptable> weaponType;
     [SerializeField] private EnergySystem energySystem;
+    [SerializeField] private Renderer renderer;
+    [SerializeField] private float switchInactiveTime;
+    private bool _canSwitch = true;
 
     private int _currentProjectileType;
 
@@ -15,25 +18,33 @@ public class WeaponController : MonoBehaviour
         get => _currentProjectileType;
         set
         {
-            if (value < 0)
-                _currentProjectileType = weaponType.Count - 1;
-            else if (value > weaponType.Count - 1)
-                _currentProjectileType = 0;
-            else
-                _currentProjectileType = value;
+            if (_canSwitch)
+            {
+                if (value < 0)
+                    _currentProjectileType = weaponType.Count - 1;
+                else if (value > weaponType.Count - 1)
+                    _currentProjectileType = 0;
+                else
+                    _currentProjectileType = value;
+                renderer.material.color = weaponType[CurrentType].ProjectileColor;
+                StartCoroutine(WaitForSwitch());
+            }
         }
     }
 
-    public void ChangeTypeNext()
+    public void ChangeWeaponType(float mouseInput)
     {
-        CurrentType++;
+        switch (mouseInput)
+        {
+            case > 0.6f:
+                CurrentType++;
+                break;
+            case < -0.6f:
+                CurrentType--;
+                break;
+        }
     }
-
-    public void ChangeTypePrev()
-    {
-        CurrentType--;
-    }
-
+    
     public void Shoot(Vector3 direction)
     {
         SpawnProjectile(direction);
@@ -41,9 +52,16 @@ public class WeaponController : MonoBehaviour
 
     private Projectile SpawnProjectile(Vector3 direction)
     {
-        var result = Instantiate(weaponType[CurrentType], transform.position, Quaternion.identity);
+        var result = Instantiate(weaponType[CurrentType].ProjectileType, transform.position, Quaternion.identity);
         result.MoveDirection = direction;
         result.energySystem = energySystem;
         return result;
+    }
+
+    private IEnumerator WaitForSwitch()
+    {
+        _canSwitch = false;
+        yield return new WaitForSeconds(switchInactiveTime);
+        _canSwitch = true;
     }
 }
