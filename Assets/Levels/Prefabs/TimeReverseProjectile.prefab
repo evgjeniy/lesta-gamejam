@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8861156457363446905}
   - component: {fileID: 4139575101401215759}
   - component: {fileID: 5141175483770259058}
-  - component: {fileID: 7200719493399309674}
+  - component: {fileID: -1526945881165309892}
   m_Layer: 7
-  m_Name: Projectile
+  m_Name: TimeReverseProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: de6008f19c22dca42b2902d67b0b49a0, type: 2}
+  - {fileID: 2100000, guid: 6423b540fc4937148938ee3d2ed67d0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,7 +115,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3791063050812226774}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &7200719493399309674
+--- !u!114 &-1526945881165309892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3791063050812226774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c5a0fb95994b184480211f2571f33d0, type: 3}
+  m_Script: {fileID: 11500000, guid: fde9bdf7741a45340ba93829b88ed634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  lifeTime: 2
+  lifeTime: 3

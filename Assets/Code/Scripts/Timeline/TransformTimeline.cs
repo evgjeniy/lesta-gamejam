@@ -2,7 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public class TransformTimeline : Timeline<TransformState>
+public class TransformTimeline : TimelineBase<TransformState>
 {
     [SerializeField] TransformStateObject timeGameObject;
 

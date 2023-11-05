@@ -1,5 +1,5 @@
 ﻿using Code.Scripts.Services;
-using Code.Scripts.Shoot;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,8 +18,7 @@ namespace Code.Scripts
         [SerializeField] private Transform groundCheck;
         [SerializeField] private LayerMask groundMask;
         
-        [SerializeField] private Projectile projectileRef;
-
+        [SerializeField] private WeaponController weaponController;
         private PlayerInputBehaviour _inputBehaviour;
         private Rigidbody _rigidbody;
 
@@ -35,12 +34,14 @@ namespace Code.Scripts
         {
             _inputBehaviour.Jump.performed += Jump;
             _inputBehaviour.Shoot.performed += Shoot;
+            _inputBehaviour.ChangeWeapon.performed += ChangeWeapon;
         }
 
         private void OnDisable()
         {
             _inputBehaviour.Jump.performed -= Jump;
             _inputBehaviour.Shoot.performed -= Shoot;
+            _inputBehaviour.ChangeWeapon.performed -= ChangeWeapon;
         }
 
         private void Update() => _shootTimer += Time.deltaTime;
@@ -52,6 +53,11 @@ namespace Code.Scripts
             _rigidbody.position += moveDirection * (speed * Time.fixedDeltaTime);
             
             if (moveAxis != 0.0f) _rigidbody.rotation = Quaternion.LookRotation(moveDirection);
+        }
+
+        private void ChangeWeapon(InputAction.CallbackContext context)
+        {
+            weaponController.ChangeTypeNext();
         }
 
         private void Jump(InputAction.CallbackContext context)
@@ -70,8 +76,8 @@ namespace Code.Scripts
             
             var movementDirection = Input.mousePosition;
             movementDirection.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
-            var projectileInstance = Instantiate(projectileRef, transform.position, Quaternion.identity);
-            projectileInstance.MoveDirection = Camera.main.ScreenToWorldPoint(movementDirection) - transform.position;
+
+            weaponController.Shoot(Camera.main.ScreenToWorldPoint(movementDirection) - transform.position);
         }
     }
 }
