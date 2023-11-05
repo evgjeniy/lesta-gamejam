@@ -22,7 +22,11 @@ public class TimeStopProjectile : Projectile
             timeline.StartTime();
         };
         energySystem.AddSpender(energy);
+
+        if (!timeline.IsReversed)
+            timeline?.StopReverse();
         timeline?.StopTime();
+
         Destroy(gameObject);
     }
 

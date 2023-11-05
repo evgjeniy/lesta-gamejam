@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ITimeReversable
 {
+    public bool IsReversed { get; }
     public void StartReverse();
     public void StopReverse();
 }

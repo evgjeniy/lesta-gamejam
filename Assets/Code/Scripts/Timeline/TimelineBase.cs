@@ -12,13 +12,8 @@ public abstract class TimelineBase<T> : Timeline where T : ITimeStamp
 
     protected ITimeObject<T> timeObject;
 
-    protected bool _isStoped = false;
-    protected bool _isReversed = false;
-
     protected Deque<T> _frames;
 
-    public bool IsReversed => _isReversed;
-    public bool IsStoped => _isStoped;
     // Timeline duration in frames
     public int TimelineFrames => duration * framerate;
 

@@ -23,7 +23,9 @@ public class TimeReverseProjectile : Projectile
         };
         energySystem.AddSpender(energy);
 
-        timeline?.StartReverse();
+        if(!timeline.IsReversed)
+            timeline?.StartReverse();
+
         Destroy(gameObject);
     }
 
