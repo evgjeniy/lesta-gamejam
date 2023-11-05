@@ -42,7 +42,7 @@ public class TransformTimeline : TimelineBase<TransformState>
         foreach (var frame in _frames)
         {
             Gizmos.color = Color.white;
-            Gizmos.DrawWireMesh(gizmosMesh, frame.Position, frame.Rotation, Vector3.one);
+            Gizmos.DrawWireMesh(gizmosMesh, frame.Position, frame.Rotation, timeGameObject.transform.localScale) ;
             Gizmos.color = Color.red;
             Gizmos.DrawLine(frame.Position, (frame.Position + frame.Velocity).normalized);
         }

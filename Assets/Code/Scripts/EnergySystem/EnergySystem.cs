@@ -6,8 +6,6 @@ namespace Code.Scripts.EnergySystem
 {
     public class EnergySystem : MonoBehaviour
     {
-        [Header("Development stage adds")]
-        [SerializeField] private EnergySpender spenderPrefab;
         [SerializeField] private float energyRechargeRate;
         [SerializeField] private int minimalEnergyToAddSpender;
         [SerializeField] private int maxEnergy;
@@ -35,15 +33,16 @@ namespace Code.Scripts.EnergySystem
 
         private void Update()
         {
-            /*
-            if (Input.GetMouseButtonDown(0))
-            {
-                var newSpender = GameObject.Instantiate(spenderPrefab);
-                AddSpender(newSpender);
-            }
-            */
             CheckCurrentEnergy();
             RecountEnergy();
+        }
+
+        public bool SpendEnergy(float value)
+        {
+            if(value < 0 || value > CurrentEnergy) return false;
+
+            CurrentEnergy -= value;
+            return true;
         }
 
         private void OnEnable()
@@ -71,7 +70,7 @@ namespace Code.Scripts.EnergySystem
             }
         }
 
-        private void RemoveAllSpenders()
+        public void RemoveAllSpenders()
         {
             foreach (var spender in _spenders)
             {

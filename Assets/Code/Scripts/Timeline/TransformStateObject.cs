@@ -33,7 +33,8 @@ public class TransformStateObject : MonoBehaviour, ITimeObject<TransformState>
 
     public void SetState(TransformState state)
     {
-        transform.position = state.Position;
+        if(state.Position.x != float.NaN)
+            transform.position = state.Position;
         transform.rotation = state.Rotation;
 
         if (!_rigidbody.isKinematic)

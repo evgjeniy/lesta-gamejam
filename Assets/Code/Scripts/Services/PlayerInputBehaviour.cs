@@ -11,6 +11,7 @@ namespace Code.Scripts.Services
         public InputAction Shoot => _inputActions.Player.Shoot;
         public InputAction Jump => _inputActions.Player.Jump;
         public InputAction ChangeWeapon => _inputActions.Player.ChangeWeapon;
+        public InputAction DisableAbility => _inputActions.Player.DisableAbility;
 
         private void Awake() => _inputActions = new InputActions();
 

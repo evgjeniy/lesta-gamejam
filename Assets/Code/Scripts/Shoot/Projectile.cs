@@ -1,3 +1,4 @@
+using Code.Scripts.EnergySystem;
 using UnityEngine;
 
 
@@ -8,6 +9,8 @@ public abstract class Projectile : MonoBehaviour, IProjectileHit
     [SerializeField] private int lifeTime;
 
     private Rigidbody _rigidbody;
+
+    public EnergySystem energySystem;
 
     public Vector3 MoveDirection
     {

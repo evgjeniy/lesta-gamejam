@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Code.Scripts.EnergySystem
 {
@@ -8,8 +10,11 @@ namespace Code.Scripts.EnergySystem
 
         public float EnergySpend => energySpendPerTick;
 
+        public event Action OnDestroy;
+
         public void Unsubscribe()
         {
+            OnDestroy?.Invoke();
             Destroy(gameObject);
         }
     }

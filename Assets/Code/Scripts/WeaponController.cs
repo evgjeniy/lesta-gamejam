@@ -1,3 +1,4 @@
+using Code.Scripts.EnergySystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField] private List<Projectile> weaponType;
+    [SerializeField] private EnergySystem energySystem;
 
     private int _currentProjectileType;
 
@@ -41,6 +43,7 @@ public class WeaponController : MonoBehaviour
     {
         var result = Instantiate(weaponType[CurrentType], transform.position, Quaternion.identity);
         result.MoveDirection = direction;
+        result.energySystem = energySystem;
         return result;
     }
 }
