@@ -1,30 +1,33 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider))]
-public class ButtonTrigger : MonoBehaviour
+namespace Code.Scripts.Doors
 {
-    [SerializeField] private UnityEvent actionPressed;
-    [SerializeField] private UnityEvent actionReleased;
-    private void Start()
+    [RequireComponent(typeof(Collider))]
+    public class ButtonTrigger : MonoBehaviour
     {
-        gameObject.GetComponent<Collider>().isTrigger = true;
-    }
+        [SerializeField] private UnityEvent actionPressed;
+        [SerializeField] private UnityEvent actionReleased;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<ConfigurableJoint>() != null)
+        private void Start()
         {
-            actionPressed?.Invoke();
+            gameObject.GetComponent<Collider>().isTrigger = true;
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<ConfigurableJoint>() != null)
+        private void OnTriggerEnter(Collider other)
         {
-            actionReleased?.Invoke();
+            if (other.GetComponent<ConfigurableJoint>() != null)
+            {
+                actionPressed?.Invoke();
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<ConfigurableJoint>() != null)
+            {
+                actionReleased?.Invoke();
+            }
         }
     }
 }

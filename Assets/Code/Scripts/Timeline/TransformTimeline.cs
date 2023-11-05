@@ -1,50 +1,54 @@
 using System.Collections;
 using System.Linq;
+using Code.Scripts.Util;
 using UnityEngine;
 
-public class TransformTimeline : TimelineBase<TransformState>
+namespace Code.Scripts.Timeline
 {
-    [SerializeField] TransformStateObject timeGameObject;
-
-    [Header("Gizmos")]
-    [SerializeField] protected bool gizmosVisualization;
-    // Mesh for state visualization
-    [SerializeField] Mesh gizmosMesh;
-
-    private void Awake()
+    public class TransformTimeline : TimelineBase<TransformState>
     {
-        _framePeriod = 1f / framerate;
-        _frames = new Deque<TransformState>(TimelineFrames);
-        timeObject = timeGameObject;
-    }
+        [SerializeField] TransformStateObject timeGameObject;
 
-    protected override IEnumerator Reverse()
-    {
-        if(_frames.Count == 0) yield break;
+        [Header("Gizmos")]
+        [SerializeField] protected bool gizmosVisualization;
+        // Mesh for state visualization
+        [SerializeField] Mesh gizmosMesh;
 
-        TransformState previousFrame = _frames.Last();
-        foreach (var frame in _frames.Reverse())
+        private void Awake()
         {
-            yield return timeObject.SetStateSmooth(frame, Mathf.Abs(previousFrame.Time - frame.Time) / reverseSpeed);
-
-            if (!_isReversed) break;
-
-            previousFrame = frame;
+            _framePeriod = 1f / framerate;
+            _frames = new Deque<TransformState>(TimelineFrames);
+            timeObject = timeGameObject;
         }
-        _frames.Cutoff(previousFrame);
-        yield break;
-    }
 
-    private void OnDrawGizmos()
-    {
-        if (!gizmosVisualization || _frames == null || !gizmosMesh) return;
-
-        foreach (var frame in _frames)
+        protected override IEnumerator Reverse()
         {
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireMesh(gizmosMesh, frame.Position, frame.Rotation, timeGameObject.transform.localScale) ;
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(frame.Position, (frame.Position + frame.Velocity).normalized);
+            if(_frames.Count == 0) yield break;
+
+            TransformState previousFrame = _frames.Last();
+            foreach (var frame in _frames.Reverse())
+            {
+                yield return timeObject.SetStateSmooth(frame, Mathf.Abs(previousFrame.Time - frame.Time) / reverseSpeed);
+
+                if (!_isReversed) break;
+
+                previousFrame = frame;
+            }
+            _frames.Cutoff(previousFrame);
+            yield break;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!gizmosVisualization || _frames == null || !gizmosMesh) return;
+
+            foreach (var frame in _frames)
+            {
+                Gizmos.color = Color.white;
+                Gizmos.DrawWireMesh(gizmosMesh, frame.Position, frame.Rotation, timeGameObject.transform.localScale) ;
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(frame.Position, (frame.Position + frame.Velocity).normalized);
+            }
         }
     }
 }

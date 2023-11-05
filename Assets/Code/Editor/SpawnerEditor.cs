@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using Code.Scripts.KillSpawn;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Spawner))]
-public class SpawnerEditor : Editor
+namespace Code.Editor
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(Spawner))]
+    public class SpawnerEditor : UnityEditor.Editor
     {
-        Spawner spawner = (Spawner)target;
+        public override void OnInspectorGUI()
+        {
+            Spawner spawner = (Spawner)target;
 
-        DrawDefaultInspector();
+            DrawDefaultInspector();
 
-        if (GUILayout.Button("Spawn"))
-            spawner.Spawn();
+            if (GUILayout.Button("Spawn"))
+                spawner.Spawn();
+        }
     }
 }

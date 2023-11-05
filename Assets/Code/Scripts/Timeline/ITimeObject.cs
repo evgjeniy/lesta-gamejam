@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITimeObject <T> : ITimeStopable, IStateCapturable<T>
+namespace Code.Scripts.Timeline
 {
+    public interface ITimeObject <T> : ITimeStopable, IStateCapturable<T>
+    {
     
+    }
 }

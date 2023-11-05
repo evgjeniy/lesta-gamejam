@@ -1,24 +1,27 @@
 using UnityEngine;
 
-public class BulletTrajectory : MonoBehaviour
+namespace Code.Scripts.Shoot
 {
-    [SerializeField] private LineRenderer lr;
-    [SerializeField] private GameObject player;
-    [SerializeField] private float maxLen;
-
-    void LateUpdate()
+    public class BulletTrajectory : MonoBehaviour
     {
-        Vector3 firstPoint = player.transform.position;    
-        lr.SetPosition(0, firstPoint);                      //ïåðâàÿ òî÷êà
-        Vector3 secondPoint = Input.mousePosition;
-        secondPoint.z = Mathf.Abs(player.transform.position.z - Camera.main.transform.position.z); //âòîðàÿ òî÷êà
-        secondPoint = Camera.main.ScreenToWorldPoint(secondPoint);
-        if (Vector3.Distance(firstPoint, secondPoint) > maxLen) //ïðîâåðêà äëèíû
+        [SerializeField] private LineRenderer lr;
+        [SerializeField] private GameObject player;
+        [SerializeField] private float maxLen;
+
+        private void LateUpdate()
         {
-            Vector3 vec = secondPoint - firstPoint;
-            vec = vec.normalized * maxLen;              //ïðèâåäåíèå ê ìàêñèìàëüíîé äëèíå
-            secondPoint = firstPoint + vec;
+            var firstPoint = player.transform.position;    
+            lr.SetPosition(0, firstPoint);                      //Ã¯Ã¥Ã°Ã¢Ã Ã¿ Ã²Ã®Ã·ÃªÃ 
+            var secondPoint = Input.mousePosition;
+            secondPoint.z = Mathf.Abs(player.transform.position.z - Camera.main.transform.position.z); //Ã¢Ã²Ã®Ã°Ã Ã¿ Ã²Ã®Ã·ÃªÃ 
+            secondPoint = Camera.main.ScreenToWorldPoint(secondPoint);
+            if (Vector3.Distance(firstPoint, secondPoint) > maxLen) //Ã¯Ã°Ã®Ã¢Ã¥Ã°ÃªÃ  Ã¤Ã«Ã¨Ã­Ã»
+            {
+                var vec = secondPoint - firstPoint;
+                vec = vec.normalized * maxLen;              //Ã¯Ã°Ã¨Ã¢Ã¥Ã¤Ã¥Ã­Ã¨Ã¥ Ãª Ã¬Ã ÃªÃ±Ã¨Ã¬Ã Ã«Ã¼Ã­Ã®Ã© Ã¤Ã«Ã¨Ã­Ã¥
+                secondPoint = firstPoint + vec;
+            }
+            lr.SetPosition(1, secondPoint);
         }
-        lr.SetPosition(1, secondPoint);
     }
 }

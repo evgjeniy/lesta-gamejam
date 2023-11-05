@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITimeReversable
+namespace Code.Scripts.Timeline
 {
-    public bool IsReversed { get; }
-    public void StartReverse();
-    public void StopReverse();
+    public interface ITimeReversable
+    {
+        public bool IsReversed { get; }
+        public void StartReverse();
+        public void StopReverse();
+    }
 }

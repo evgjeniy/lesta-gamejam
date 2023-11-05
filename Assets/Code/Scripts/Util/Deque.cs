@@ -1,94 +1,96 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using static UnityEditor.Progress;
 
-public class Deque<T> : IEnumerable<T>
+namespace Code.Scripts.Util
 {
-    private List<T> _items;
-
-    public Deque()
+    public class Deque<T> : IEnumerable<T>
     {
-        _items = new List<T>();
-    }
+        private readonly List<T> _items;
 
-    public Deque(int v)
-    {
-        _items = new List<T>(v);
-    }
-
-    public void AddFront(T item)
-    {
-        _items.Insert(0, item);
-    }
-
-    public void AddBack(T item)
-    {
-        _items.Add(item);
-    }
-
-    public T RemoveFront()
-    {
-        if (_items.Count == 0)
+        public Deque()
         {
-            throw new InvalidOperationException("Deque is empty.");
+            _items = new List<T>();
         }
 
-        T front = _items[0];
-        _items.RemoveAt(0);
-        return front;
-    }
-
-    public T RemoveBack()
-    {
-        if (_items.Count == 0)
+        public Deque(int v)
         {
-            throw new InvalidOperationException("Deque is empty.");
+            _items = new List<T>(v);
         }
 
-        T back = _items[_items.Count - 1];
-        _items.RemoveAt(_items.Count - 1);
-        return back;
-    }
-
-    public T PeekFront()
-    {
-        if (_items.Count == 0)
+        public void AddFront(T item)
         {
-            throw new InvalidOperationException("Deque is empty.");
+            _items.Insert(0, item);
         }
 
-        return _items[0];
-    }
-
-    public T PeekBack()
-    {
-        if (_items.Count == 0)
+        public void AddBack(T item)
         {
-            throw new InvalidOperationException("Deque is empty.");
+            _items.Add(item);
         }
 
-        return _items[_items.Count - 1];
-    }
+        public T RemoveFront()
+        {
+            if (_items.Count == 0)
+            {
+                throw new InvalidOperationException("Deque is empty.");
+            }
 
-    public void Cutoff(T item)
-    {
-        int index = _items.IndexOf(item);
-        _items.RemoveRange(index, Count - index);
-    }
+            T front = _items[0];
+            _items.RemoveAt(0);
+            return front;
+        }
 
-    public IEnumerator<T> GetEnumerator()
-    {
-        return _items.GetEnumerator();
-    }
+        public T RemoveBack()
+        {
+            if (_items.Count == 0)
+            {
+                throw new InvalidOperationException("Deque is empty.");
+            }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+            T back = _items[_items.Count - 1];
+            _items.RemoveAt(_items.Count - 1);
+            return back;
+        }
 
-    public int Count
-    {
-        get { return _items.Count; }
+        public T PeekFront()
+        {
+            if (_items.Count == 0)
+            {
+                throw new InvalidOperationException("Deque is empty.");
+            }
+
+            return _items[0];
+        }
+
+        public T PeekBack()
+        {
+            if (_items.Count == 0)
+            {
+                throw new InvalidOperationException("Deque is empty.");
+            }
+
+            return _items[_items.Count - 1];
+        }
+
+        public void Cutoff(T item)
+        {
+            int index = _items.IndexOf(item);
+            _items.RemoveRange(index, Count - index);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public int Count
+        {
+            get { return _items.Count; }
+        }
     }
 }
