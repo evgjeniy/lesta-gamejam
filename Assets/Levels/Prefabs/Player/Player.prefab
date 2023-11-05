@@ -181,6 +181,8 @@ GameObject:
   - component: {fileID: 6694091417110000171}
   - component: {fileID: 7093080816630090540}
   - component: {fileID: 7769254792566588201}
+  - component: {fileID: 5885678779735063785}
+  - component: {fileID: 2738514606945839756}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -258,11 +260,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpVelocityY: 5
+  jumpVelocityY: 6
   shootCooldown: 0.5
+  shootEnergy: 10
   groundCheckRadius: 0.1
   groundCheck: {fileID: 1151692533683467445}
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
-  projectileRef: {fileID: 7200719493399309674, guid: 488e6dc0bd67aa047883145e8c5b4a1e, type: 3}
+    m_Bits: 65
+  weaponController: {fileID: 2738514606945839756}
+  energySystem: {fileID: 5885678779735063785}
+--- !u!114 &5885678779735063785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366326624286430398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07810e78848a3134793aa1408d4923f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyRechargeRate: 0.1
+  minimalEnergyToAddSpender: 10
+  maxEnergy: 100
+--- !u!114 &2738514606945839756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366326624286430398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2d67ff6259ba146b23f9ae43bf42a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType:
+  - {fileID: 7985885932296697623, guid: 48db93bae36dac94a8967d0d94e60a98, type: 3}
+  - {fileID: -1526945881165309892, guid: 488e6dc0bd67aa047883145e8c5b4a1e, type: 3}
+  - {fileID: -1796175233669746801, guid: 6d89cf6333524604891f1b390465253a, type: 3}
+  energySystem: {fileID: 5885678779735063785}
