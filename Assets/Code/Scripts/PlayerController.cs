@@ -1,5 +1,5 @@
 ﻿using Code.Scripts.Services;
-using System;
+using Code.Scripts.Shoot;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,62 +11,67 @@ namespace Code.Scripts
     {
         [SerializeField, Min(0.0f)] private float speed = 5.0f;
         [SerializeField, Min(0.0f)] private float jumpVelocityY = 5.0f;
+        [SerializeField, Min(0.0f)] private float shootCooldown = 0.5f;
         
         [Header("Overlap")]
-        [SerializeField, Min(0.0f)] private float groundCheckRadius;
+        [SerializeField, Min(0.0f)] private float groundCheckRadius = 0.1f;
         [SerializeField] private Transform groundCheck;
         [SerializeField] private LayerMask groundMask;
-
+        
         [SerializeField] private Projectile projectileRef;
 
-        private Rigidbody _rigidbody;
         private PlayerInputBehaviour _inputBehaviour;
+        private Rigidbody _rigidbody;
 
-        private Projectile.Factory _factory;
+        private float _shootTimer;
 
         private void Awake()
         {
-            _factory = new Projectile.Factory(projectileRef);
             _rigidbody = GetComponent<Rigidbody>();
             _inputBehaviour = GetComponent<PlayerInputBehaviour>();
         }
 
-        private void Start()
-        {
-            _inputBehaviour.ShootAction.performed += OnShootAction;
-        }
-
         private void OnEnable()
         {
-          //  _inputBehaviour.ShootAction.performed += OnShootAction;
+            _inputBehaviour.Jump.performed += Jump;
+            _inputBehaviour.Shoot.performed += Shoot;
         }
 
         private void OnDisable()
         {
-            _inputBehaviour.ShootAction.performed -= OnShootAction;
+            _inputBehaviour.Jump.performed -= Jump;
+            _inputBehaviour.Shoot.performed -= Shoot;
         }
 
-        private void OnShootAction(InputAction.CallbackContext context)
-        {
-            _factory.Create(Vector3.left).transform.position = transform.position;
-        }
+        private void Update() => _shootTimer += Time.deltaTime;
 
         private void FixedUpdate()
         {
-            var inputDirection = _inputBehaviour.GetMoveDirection();
-            _rigidbody.velocity = inputDirection * speed;
-            transform.rotation = Quaternion.LookRotation(inputDirection);
-
-            if (_inputBehaviour.IsJumping()) Jump();
+            var moveAxis = _inputBehaviour.GetMoveAxis();
+            var moveDirection = Vector3.right * moveAxis;
+            _rigidbody.position += moveDirection * (speed * Time.fixedDeltaTime);
+            
+            if (moveAxis != 0.0f) _rigidbody.rotation = Quaternion.LookRotation(moveDirection);
         }
-        
-        private void Jump()
+
+        private void Jump(InputAction.CallbackContext context)
         {
             if (!Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask.value)) return;
             
-            var currentVelocity = _rigidbody.velocity;
-            var jumpVelocity = new Vector3(currentVelocity.x, jumpVelocityY, currentVelocity.z);
-            _rigidbody.velocity = jumpVelocity;
+            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, jumpVelocityY, 0.0f);
+        }
+
+        private void Shoot(InputAction.CallbackContext context)
+        {
+            if (_shootTimer < shootCooldown) return;
+            _shootTimer = 0.0f;
+
+            if (Camera.main == null) return;
+            
+            var movementDirection = Input.mousePosition;
+            movementDirection.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
+            var projectileInstance = Instantiate(projectileRef, transform.position, Quaternion.identity);
+            projectileInstance.MoveDirection = Camera.main.ScreenToWorldPoint(movementDirection);
         }
     }
 }

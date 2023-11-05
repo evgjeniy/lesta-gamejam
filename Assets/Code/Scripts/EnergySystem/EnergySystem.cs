@@ -1,28 +1,28 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Code.EnergySystem
+namespace Code.Scripts.EnergySystem
 {
-
-
     public class EnergySystem : MonoBehaviour
     {
-        [Header("Development stage adds")] 
-        [SerializeField] private EnergySpender spenderPrefab;        
-        
-        
+        [Header("Development stage adds")]
+        [SerializeField] private EnergySpender spenderPrefab;
         [SerializeField] private float energyRechargeRate;
         [SerializeField] private int minimalEnergyToAddSpender;
         [SerializeField] private int maxEnergy;
-        
+
+        private float _currentEnergy;
+        private List<EnergySpender> _spenders = new List<EnergySpender>();
+
+        public Action<float> OnEnergyChanged;
+
         public int MaxEnergy
         {
             get => maxEnergy;
             set => maxEnergy = value > 0 ? value : 0;
         }
+
         public float CurrentEnergy
         {
             get => _currentEnergy;
@@ -32,11 +32,24 @@ namespace Code.EnergySystem
                 OnEnergyChanged?.Invoke(_currentEnergy);
             }
         }
-        public Action<float> OnEnergyChanged;
-        
-        private float _currentEnergy;
-        private List<EnergySpender> _spenders = new List<EnergySpender>();
 
+        private void Update()
+        {
+            /*
+            if (Input.GetMouseButtonDown(0))
+            {
+                var newSpender = GameObject.Instantiate(spenderPrefab);
+                AddSpender(newSpender);
+            }
+            */
+            CheckCurrentEnergy();
+            RecountEnergy();
+        }
+
+        private void OnEnable()
+        {
+            CurrentEnergy = MaxEnergy;
+        }
         
         public void AddSpender(EnergySpender spender)
         {
@@ -64,7 +77,7 @@ namespace Code.EnergySystem
             {
                 spender.Unsubscribe();
             }
-            
+
             _spenders.Clear();
         }
 
@@ -89,24 +102,6 @@ namespace Code.EnergySystem
             {
                 RemoveAllSpenders();
             }
-        }
-        
-        void Update()
-        {
-            /*
-            if (Input.GetMouseButtonDown(0))
-            {
-                var newSpender = GameObject.Instantiate(spenderPrefab);
-                AddSpender(newSpender);
-            }
-            */
-            CheckCurrentEnergy();
-            RecountEnergy();
-        }
-
-        private void OnEnable()
-        {
-            CurrentEnergy = MaxEnergy;
         }
     }
 }

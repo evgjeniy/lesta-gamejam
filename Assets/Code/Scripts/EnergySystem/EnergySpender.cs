@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.EnergySystem
+namespace Code.Scripts.EnergySystem
 {
     public class EnergySpender: MonoBehaviour
     {
