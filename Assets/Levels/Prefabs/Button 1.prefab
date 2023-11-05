@@ -400,7 +400,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 0.5, z: 1.0000002}
-  m_Center: {x: 0, y: 0.6, z: 0}
+  m_Center: {x: 0, y: 0.39, z: 0}
 --- !u!1 &7136803373215539648
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,4 +501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babc6c27f8d143c6a003fbaeeb590957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedDoor: {fileID: 0}
+  actionPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  actionReleased:
+    m_PersistentCalls:
+      m_Calls: []
