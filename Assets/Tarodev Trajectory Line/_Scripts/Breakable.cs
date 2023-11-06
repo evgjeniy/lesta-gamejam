@@ -10,7 +10,7 @@ namespace Tarodev_Trajectory_Line._Scripts
 
         private bool _broken;
 
-        private void OnCollisionEnter(Collision collision) {
+        public void OnCollisionEnter(Collision collision) {
             if (_broken) return;
             if (((layerMask.value >> collision.gameObject.layer) & 1) != 1) return;
 

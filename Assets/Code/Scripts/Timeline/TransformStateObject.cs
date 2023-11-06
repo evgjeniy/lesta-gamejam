@@ -35,7 +35,7 @@ namespace Code.Scripts.Timeline
 
         public void SetState(TransformState state)
         {
-            if(state.Position.x != float.NaN)
+            if(state.Position.x != float.NaN && state.Position.y != float.NaN && state.Position.z != float.NaN)
                 transform.position = state.Position;
             transform.rotation = state.Rotation;
 

@@ -15,17 +15,20 @@ namespace Code.Scripts.Shoot
         public override void OnHitDynamic(GameObject obj, Collision context)
         {
             obj.TryGetComponent<Timeline.Timeline>(out var timeline);
-            var energy = Instantiate(energySpender);
-            energy.OnDestroy += () =>
-            {
-                timeline.StopReverse();
-                timeline.StartTime();
-            };
-            energySystem.AddSpender(energy);
 
-            if (!timeline.IsReversed)
-                timeline?.StopReverse();
-            timeline?.StopTime();
+            if (!timeline.IsStoped)
+            {
+                var energy = Instantiate(energySpender);
+                energy.OnDestroy += () =>
+                {
+                    timeline.StopReverse();
+                    timeline.StartTime();
+                };
+
+                energySystem.AddSpender(energy);
+
+                timeline?.StopTime();
+            }
 
             Destroy(gameObject);
         }

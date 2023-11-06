@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 5
   framerate: 24
-  reverseSpeed: 1
+  reverseSpeed: 0.2
   timeGameObject: {fileID: 8416568429027411607}
   gizmosVisualization: 1
   gizmosMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

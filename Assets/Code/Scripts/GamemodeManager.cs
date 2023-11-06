@@ -13,7 +13,7 @@ public class GamemodeManager : MonoBehaviour
     [SerializeField] List<Spawner> spawners;
     [SerializeField] EnergyUI energyUI;
     [SerializeField] Levelend levelend;
-    [SerializeField] string nextlevel;
+    [SerializeField] SceneSwitcher nextlevel;
 
     private void OnEnable()
     {
@@ -26,17 +26,7 @@ public class GamemodeManager : MonoBehaviour
 
     public void CompleteLevel()
     {
-        LoadNextLevel();
-    }
-
-    public void LoadNextLevel()
-    {
-        SceneManager.LoadScene(nextlevel);
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        nextlevel.LoadNextLevel();
     }
 
     private void BindPlayer(IDestroyable destroyable)

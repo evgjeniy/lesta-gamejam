@@ -1246,6 +1246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383952234}
   - component: {fileID: 1383952235}
+  - component: {fileID: 1383952236}
   m_Layer: 0
   m_Name: GamemodeManager
   m_TagString: Untagged
@@ -1285,7 +1286,20 @@ MonoBehaviour:
   - {fileID: 1166391223}
   energyUI: {fileID: 1286637266}
   levelend: {fileID: 2091745265}
-  nextlevel: ShootScene
+  nextlevel: {fileID: 1383952236}
+--- !u!114 &1383952236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383952233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb2a3779604e124c9afaf99eca847f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextlevel: MainMenu
 --- !u!1 &1503428330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,7 +2234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6139040297601848773, guid: bdd7389ccb2731c4da4e2a0909daedfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.06
+      value: 5.23
       objectReference: {fileID: 0}
     - target: {fileID: 6139040297601848773, guid: bdd7389ccb2731c4da4e2a0909daedfd, type: 3}
       propertyPath: m_LocalPosition.z
