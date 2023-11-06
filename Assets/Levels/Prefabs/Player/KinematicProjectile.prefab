@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: de6008f19c22dca42b2902d67b0b49a0, type: 2}
+  - {fileID: 2100000, guid: 3fb37cfe73c38a143a3d66a7b5e244b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,3 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   lifeTime: 2
+  particles: {fileID: 19875214, guid: 146d2ff25be0f824fa285b16b2915ff3, type: 3}
+  energySystem: {fileID: 0}

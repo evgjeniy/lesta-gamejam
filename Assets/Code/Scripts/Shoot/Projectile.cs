@@ -8,7 +8,7 @@ namespace Code.Scripts.Shoot
     {
         [SerializeField] private float moveSpeed;
         [SerializeField] private int lifeTime;
-
+        [SerializeField] private ParticleSystem particles;
         private Rigidbody _rigidbody;
 
         public EnergySystem energySystem;
@@ -35,6 +35,13 @@ namespace Code.Scripts.Shoot
             if (hitResolver == null) return;
 
             hitResolver.ResolveHit(this, collision);
+        }
+
+        protected void OnHit()
+        {
+            var part = Instantiate(particles);
+            part.transform.position = transform.position;
+            Destroy(part.gameObject, 2f);
         }
 
         public abstract void OnHitStatic(GameObject obj, Collision context);

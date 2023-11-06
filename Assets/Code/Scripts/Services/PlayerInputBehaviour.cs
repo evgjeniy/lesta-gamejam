@@ -13,6 +13,8 @@ namespace Code.Scripts.Services
         public InputAction ChangeWeapon => _inputActions.Player.ChangeWeapon;
         public InputAction DisableAbility => _inputActions.Player.DisableAbility;
 
+        public InputActions InputActions => _inputActions;
+
         private void Awake() => _inputActions = new InputActions();
 
         private void OnEnable() => _inputActions.Enable();

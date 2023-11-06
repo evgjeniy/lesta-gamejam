@@ -37,13 +37,23 @@ namespace Code.Scripts.Controllers
                     _currentProjectileType = 0;
                 else
                     _currentProjectileType = value;
-                renderer.material.color = weaponType[CurrentType].ProjectileColor;
-                
+                UpdateColor();
+
+
                 StartCoroutine(WaitForSwitch());
             }
         }
 
-        private void Awake() => _inputBehaviour = GetComponent<PlayerInputBehaviour>();
+        private void UpdateColor()
+        {
+            renderer.material.color = weaponType[CurrentType].ProjectileColor;
+        }
+
+        private void Awake()
+        {
+            _inputBehaviour = GetComponent<PlayerInputBehaviour>();
+            UpdateColor();
+        }
 
         private void Update() => _shootTimer += Time.deltaTime;
 
