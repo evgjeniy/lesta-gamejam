@@ -1,3 +1,4 @@
+using Code.Scripts.Energy;
 using UnityEngine;
 
 namespace Code.Scripts.Shoot
@@ -10,7 +11,7 @@ namespace Code.Scripts.Shoot
 
         private Rigidbody _rigidbody;
 
-        public EnergySystem.EnergySystem energySystem;
+        public EnergySystem energySystem;
 
         public Vector3 MoveDirection
         {

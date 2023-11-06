@@ -2808,6 +2808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpVelocityY: 5
+  jumpMoveSpeedX: 3
+  animationSmoothValue: 10
   groundCheckSphere:
     gizmos:
       drawType: 1

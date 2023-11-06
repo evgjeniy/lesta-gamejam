@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Code.Scripts.Energy;
 using Code.Scripts.Services;
 using Code.Scripts.Shoot;
 using Code.Scripts.Util;
@@ -11,7 +12,7 @@ namespace Code.Scripts.Controllers
     public class WeaponController : MonoBehaviour
     {
         [SerializeField] private List<WeaponTypeScriptable> weaponType;
-        [SerializeField] private EnergySystem.EnergySystem energySystem;
+        [SerializeField] private EnergySystem energySystem;
         [SerializeField] private Renderer renderer;
         [SerializeField] private Transform projectileSpawnPoint;
         [SerializeField] private float switchInactiveTime;

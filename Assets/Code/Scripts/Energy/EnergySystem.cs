@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Scripts.EnergySystem
+namespace Code.Scripts.Energy
 {
     public class EnergySystem : MonoBehaviour
     {
