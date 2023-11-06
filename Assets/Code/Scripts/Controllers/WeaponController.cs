@@ -13,7 +13,7 @@ namespace Code.Scripts.Controllers
     {
         [SerializeField] private List<WeaponTypeScriptable> weaponType;
         [SerializeField] private EnergySystem energySystem;
-        [SerializeField] private Renderer renderer;
+        [SerializeField] private new Renderer renderer;
         [SerializeField] private Transform projectileSpawnPoint;
         [SerializeField] private float switchInactiveTime;
         [SerializeField, Min(0.0f)] private float shootCooldown = 0.5f;
