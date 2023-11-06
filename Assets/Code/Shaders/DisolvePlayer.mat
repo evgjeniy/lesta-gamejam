@@ -24,15 +24,28 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: d401f480a42b3d24080bca69cb902ee6, type: 3}
+        m_Texture: {fileID: 2800000, guid: cbfca2f8f552b1b4086108bd97502620, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Edgewidth: 0.02
-    - _Progress: 0.52
+    - _Edgewidth: 0.01
+    - _Progress: 0
     m_Colors:
-    - _EdgeColor: {r: 0.7075472, g: 0.3334996, b: 0, a: 0}
+    - _EdgeColor: {r: 0, g: 0.50901055, b: 4.237095, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &6190659809043219695
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
