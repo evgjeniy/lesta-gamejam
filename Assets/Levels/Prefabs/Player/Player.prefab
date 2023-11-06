@@ -39,7 +39,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631756291722263917}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4eed9ed793d7f1342a30647d39c31c50, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lr: {fileID: 2095973348335132305}
-  player: {fileID: 7366326624286430398}
+  startLinePoint: {fileID: 0}
   maxLen: 5
 --- !u!1 &7366326624286430398
 GameObject:
@@ -381,14 +381,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6812a84d3ad849308f3d98f87bf9d355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   jumpVelocityY: 6
+  jumpMoveSpeedX: 3
+  animationSmoothValue: 10
   groundCheckSphere:
     gizmos:
       drawType: 1
       gizmosColor: {r: 1, g: 1, b: 1, a: 1}
     root: {fileID: 353142795653981345}
     offset: {x: 0, y: -1, z: 0}
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
     radius: 0.2
   energySystem: {fileID: 6960204825566994903}
 --- !u!114 &6960204825566994903
@@ -424,6 +428,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0ed528378681bee4e93affee2dc6c106, type: 2}
   energySystem: {fileID: 6960204825566994903}
   renderer: {fileID: 2095973348335132305}
+  projectileSpawnPoint: {fileID: 0}
   switchInactiveTime: 0
   shootCooldown: 0.5
   shootEnergy: 25
