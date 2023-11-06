@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Code.Scripts.EnergySystem
+namespace Code.Scripts.Energy
 {
     public class EnergySpender: MonoBehaviour
     {

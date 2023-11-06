@@ -1,4 +1,4 @@
-using Code.Scripts.EnergySystem;
+using Code.Scripts.Energy;
 using UnityEngine;
 
 namespace Code.Scripts.Shoot

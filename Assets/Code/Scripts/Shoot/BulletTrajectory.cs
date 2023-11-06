@@ -1,3 +1,4 @@
+using Code.Scripts.Util;
 using UnityEngine;
 
 namespace Code.Scripts.Shoot
@@ -5,23 +6,22 @@ namespace Code.Scripts.Shoot
     public class BulletTrajectory : MonoBehaviour
     {
         [SerializeField] private LineRenderer lr;
-        [SerializeField] private GameObject player;
+        [SerializeField] private Transform startLinePoint;
         [SerializeField] private float maxLen;
+        
+        private Camera _camera;
+
+        private void Start() => _camera = Camera.main;
 
         private void LateUpdate()
         {
-            var firstPoint = player.transform.position;    
-            lr.SetPosition(0, firstPoint);                      //ïåðâàÿ òî÷êà
-            var secondPoint = Input.mousePosition;
-            secondPoint.z = Mathf.Abs(player.transform.position.z - Camera.main.transform.position.z); //âòîðàÿ òî÷êà
-            secondPoint = Camera.main.ScreenToWorldPoint(secondPoint);
-            if (Vector3.Distance(firstPoint, secondPoint) > maxLen) //ïðîâåðêà äëèíû
-            {
-                var vec = secondPoint - firstPoint;
-                vec = vec.normalized * maxLen;              //ïðèâåäåíèå ê ìàêñèìàëüíîé äëèíå
-                secondPoint = firstPoint + vec;
-            }
-            lr.SetPosition(1, secondPoint);
+            if (_camera == null) return;
+            
+            var firstPoint = startLinePoint.position;    
+            lr.SetPosition(0, firstPoint);
+
+            var direction = Vector3.ClampMagnitude(_camera.GetMousePosition(firstPoint) - firstPoint, maxLen);
+            lr.SetPosition(1, firstPoint + direction);
         }
     }
 }
