@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TimeReverse
   m_EditorClassIdentifier: 
   ProjectileType: {fileID: -1526945881165309892, guid: 488e6dc0bd67aa047883145e8c5b4a1e, type: 3}
-  ProjectileColor: {r: 0, g: 0.045312863, b: 0.8301887, a: 1}
+  ProjectileColor: {r: 0, g: 1, b: 0.31992745, a: 1}

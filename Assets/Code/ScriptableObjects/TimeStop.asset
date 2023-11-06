@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TimeStop
   m_EditorClassIdentifier: 
   ProjectileType: {fileID: -1796175233669746801, guid: 6d89cf6333524604891f1b390465253a, type: 3}
-  ProjectileColor: {r: 0.6603774, g: 0.05918475, b: 0.05918475, a: 1}
+  ProjectileColor: {r: 0, g: 0.6090965, b: 1, a: 1}

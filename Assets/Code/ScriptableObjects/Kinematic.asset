@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Kinematic
   m_EditorClassIdentifier: 
   ProjectileType: {fileID: 7985885932296697623, guid: 48db93bae36dac94a8967d0d94e60a98, type: 3}
-  ProjectileColor: {r: 0, g: 0, b: 0, a: 1}
+  ProjectileColor: {r: 1, g: 0, b: 0.03486824, a: 1}
